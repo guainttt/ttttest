@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>修改分类</title>
+</head>
+<body>
+<a href="/">
+    <button>首页</button>
+</a>
+|
+<form action="/category/doupdate" method="post">
+    <h1>修改分类</h1>
+    上级分类
+    <input type="hidden" name="id" value="{{cate.id}}">
+    <select name="pid">
+        <option value="0" {{cate.pid == 0 ? 'selected':'' }} >--根分类--</option>
+
+        {% for item in ntree %}
+        <option  value="{{item.id}}" {{cate.pid == item.id ? 'selected':'' }} >
+            |{% for i in 0..item.level*4 %}
+            -
+            {% endfor %}|
+            {{item.catename}}
+        </option>
+        {% endfor %}
+    </select>
+    </br>
+    分类名称
+    <input type="text" name="catename" value="{{cate.catename}}"/>
+    </br>
+    排列顺序
+    <input type="text" name="ord" value="{{cate.ord}}"/>
+    </br>
+    <input type="submit" name="submit" value="确定">
+</form>

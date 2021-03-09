@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>分类列表</title>
+</head>
+<body>
+    <a href="/category/toadd">
+        <button>新增分类</button>
+    </a>
+    <form action="/category/order" method="post"  >
+        <table width="700" border="0">
+            <h1>分类列表</h1>
+            <tr>
+                <th>排序</th>
+                <th>列表</th>
+                <th>操作</th>
+            </tr>
+            {% for item in ntree %}
+            <tr>
+                <td><input type="text" size="4" name="id[{{item.id}}]" value="{{item.ord}}"></td>
+                <td>
+                    |{% for i in 0..item.level*4 %}
+                    ---
+                    {% endfor %} |
+                    {{item.catename}}
+                </td>
+                <td>
+                    <a href="/category/toupdate?id={{item.id}}">修改</a>
+                    /
+                    <a href="/category/dodelete?id={{item.id}}" onclick="return confirm('确定删除分类【{{item.catename}}】吗');">
+                        删除
+                    </a>
+
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3">
+                    <input type="submit" name="submit" value="修改排序">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+</body>
+</html>
