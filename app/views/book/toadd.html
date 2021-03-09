@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>新增图书</title>
+</head>
+<body>
+<a href="/">
+    <button>首页</button>
+</a>
+|
+<a href="/booklist">
+    <button>图书列表</button>
+</a>
+<form action="/book/doadd" method="post" enctype="multipart/form-data">
+    图书分类：
+    <select name="cid">
+        <option value="0" selected>--根分类--</option>
+
+        {% for item in ntree %}
+        <option  value="{{item.id}}">
+                |{% for i in 0..item.level*4 %}
+                -
+                {% endfor %}|
+                {{item.catename}}
+        </option>
+        {% endfor %}
+    </select>
+    </br>
+    图书名称：
+    <input type="text" name="name" />
+    </br>
+    图书介绍：
+    <textarea name="description"></textarea>
+    </br>
+    图书价格：
+    <input type="text" name="price">
+    </br>
+    图书库存：
+    <input type="text" name="stock">
+    </br>
+    图书封面：
+    <input type="file" name="filename">
+    </br>
+    <input type="submit" name="submit" value="添加图书">
+</form>
+
+</body>
+</html>

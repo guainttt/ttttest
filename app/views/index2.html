@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" >
+    <title>{{title}}</title>
+</head>
+<body>
+{{data.one}}
+
+
+<ul id="navigation">
+    {% for item in list %}
+    <li><a href="https://{{ item.href }}">{{ item.name }}</a></li>
+    {% endfor %}
+</ul>
+</body>
+</html>

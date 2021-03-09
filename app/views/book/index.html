@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>图书列表</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+</head>
+<body>
+    <a href="/">
+        <button>首页</button>
+    </a>
+    |
+    <a href="/book/toadd">
+        <button>新增图书</button>
+    </a>
+
+    <table width="700" border="0">
+        <h1>图书列表</h1>
+
+        <tr>
+            <th>图书名称</th>
+            <th>图书描述</th>
+            <th>图书分类</th>
+            <th>图书库存</th>
+            <th>图书价格</th>
+            <th>图书封面</th>
+            <th>操作</th>
+        </tr>
+        {% for item in list %}
+        <tr>
+            
+            <td>{{item.name}}</td>
+            <td>{{item.description}}</td>
+            <td>
+                {{item.cid}}
+            </td>
+            <td>{{item.stock}}</td>
+            <td>{{item.price}}</td>
+            <td>
+                <img style="height: 80px" src="/uploads/{{item.filename}}" />
+            </td>
+            <td>
+                <a href="/book/toupdate?id={{item.id}}">修改</a>
+                /
+                <a href="/book/dodelete?id={{item.id}}" onclick="return confirm('确定删除分类吗');">
+                    删除
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% autoescape false %}
+      {{paginator}}
+    {% endautoescape %}
+
+</body>
+</html>
